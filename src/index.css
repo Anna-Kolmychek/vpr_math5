@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* ============================================
+   CSS-переменные цветовых тем
+   ============================================ */
+
+:root {
+  /* Светлая тема (по умолчанию) */
+  --color-bg:            #f8fafc;
+  --color-surface:       #ffffff;
+  --color-text:          #1e293b;
+  --color-text-muted:    #64748b;
+  --color-accent:        #6366f1;
+  --color-accent-light:  #818cf8;
+  --color-accent-hover:  #4f46e5;
+  --color-accent-active: #4338ca;
+  --color-success-a:     #22c55e;
+  --color-success-b:     #16a34a;
+  --color-success-c:     #15803d;
+  --color-error:         #ef4444;
+  --color-warning:       #f59e0b;
+  --color-blocked:       #cbd5e1;
+  --color-border:        #e2e8f0;
+  --color-timer-bg:      #f1f5f9;
+  --color-timer-text:    #1e293b;
+  --shadow-card:         0 4px 6px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.04);
+  --shadow-card-hover:   0 8px 16px rgba(0,0,0,0.08), 0 20px 32px rgba(0,0,0,0.06);
+  --gradient-accent:     linear-gradient(135deg, #6366f1, #818cf8);
+}
+
+[data-theme="dark"] {
+  --color-bg:            #0f172a;
+  --color-surface:       #1e293b;
+  --color-text:          #f1f5f9;
+  --color-text-muted:    #94a3b8;
+  --color-accent:        #818cf8;
+  --color-accent-light:  #a5b4fc;
+  --color-accent-hover:  #6366f1;
+  --color-accent-active: #4f46e5;
+  --color-success-a:     #4ade80;
+  --color-success-b:     #22c55e;
+  --color-success-c:     #16a34a;
+  --color-error:         #f87171;
+  --color-warning:       #fbbf24;
+  --color-blocked:       #475569;
+  --color-border:        #334155;
+  --color-timer-bg:      #334155;
+  --color-timer-text:    #f1f5f9;
+  --shadow-card:         0 4px 6px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.15);
+  --shadow-card-hover:   0 8px 16px rgba(0,0,0,0.3), 0 20px 32px rgba(0,0,0,0.2);
+  --gradient-accent:     linear-gradient(135deg, #6366f1, #818cf8);
+}
+
+/* ============================================
+   Базовые стили
+   ============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;       /* мобильные */
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 18px;     /* планшет */
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 20px;     /* десктоп */
+  }
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================
+   Типографика
+   ============================================ */
+
+h1, h2, h3, h4 {
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+/* ============================================
+   Утилитарные классы
+   ============================================ */
+
+.bg-surface      { background-color: var(--color-surface); }
+.bg-app          { background-color: var(--color-bg); }
+.text-primary    { color: var(--color-text); }
+.text-muted      { color: var(--color-text-muted); }
+.text-accent     { color: var(--color-accent); }
+.text-error      { color: var(--color-error); }
+.text-success-a  { color: var(--color-success-a); }
+.text-success-b  { color: var(--color-success-b); }
+.text-success-c  { color: var(--color-success-c); }
+.border-default  { border-color: var(--color-border); }
+.shadow-card     { box-shadow: var(--shadow-card); }
+.gradient-accent { background: var(--gradient-accent); }
+
+/* ============================================
+   Анимации
+   ============================================ */
+
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.03); }
+}
+
+.animate-scale-in  { animation: scaleIn   0.2s ease-out both; }
+.animate-fade-in   { animation: fadeInUp  0.25s ease-out both; }
+.animate-modal-in  { animation: modalIn   0.3s ease-out both; }
+.animate-pulse     { animation: pulse     0.3s ease; }
+
+/* Задержки для каскадных анимаций */
+.delay-1 { animation-delay: 0.07s; }
+.delay-2 { animation-delay: 0.14s; }
+.delay-3 { animation-delay: 0.21s; }
+
+/* Отключаем анимации если пользователь предпочитает */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   Фокус для доступности
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
